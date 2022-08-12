@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Modifier un étudiant</h2>
+    Voulez-vous modifier la filiere: {{etudiant.nom}} ?
+    <br>
+    <form method="POST" action="/etudiants/{{etudiant.id}}" class="form-group">
+        <input type="text" name="nom" placeholder="Saisir le Nom" class="form-control mx-3" value="{{etudiant.nom}}">
+        <br>
+        <input type="text" name="prenom" placeholder="Saisir le Prenom" class="form-control mx-3" value="{{etudiant.prenom}}">
+        <br>
+        <input type="text" name="adresse" placeholder="Saisir l'adresse" class="form-control mx-3" value="{{etudiant.adresse}}">
+        <br>
+        <input type="email" name="email" placeholder="Saisir l'email" class="form-control mx-3" value="{{etudiant.email}}">
+        <br>
+        <label for="sel1">Selectionner la filière:</label>
+        <select class="form-control" name="filiere_id" id="sel1">
+            {%for filiere in filieres %}
+                <option value="{{filiere.id}}" {% if etudiant.filiere_id == filiere.id %} selected {% endif %}>
+                    {{filiere.libelle}}
+                </option>
+            {% endfor%}
+        </select>
+        <br> 
+        <input type="submit" value="Modifier" class="btn btn-success">
+    </form>
+</div>
+
+{% endblock %}
